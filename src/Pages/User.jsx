@@ -3,13 +3,16 @@ import { Link, useParams, useLoaderData } from 'react-router-dom';
 import Logo from '../Components/Logo';
 import SignIn from './Sign-in';
 
+
 // import { getData } from '../App/getData';
 
 
 
 
 export default function Profile() {
-  // const { userData } = useLoaderData();
+  const { userProfile } = useLoaderData();
+  console.log(userProfile)
+
 
   return (
     <>
@@ -69,8 +72,10 @@ export default function Profile() {
   )
 }
 
-// export const  userInfosLoader = async({params})=>{
+// export const  userProfileLoader = async({params})=>{
 //   const { id } = params;
 //   const userData  = await getData(id);
 //   return { userData } 
 // }
+
+

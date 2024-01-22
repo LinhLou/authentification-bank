@@ -1,31 +1,24 @@
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
-import { getData } from '../App/getData';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchToken } from '../App/redux/login';
 
 export default function SignIn() {
-  // const data = getData({email:"tony@stark.com", password:"password123"});
-
-  const token = useSelector(state =>console.log(state.login));
+  const navigate = useNavigate();
+  const nameRef = useRef();
+  const passwordRef = useRef();
+ 
   const dispatch = useDispatch();
  
-  
-  const [name, setName ] = useState('');
-  const [password, setPassword] = useState('');
-  const onChangeName = (e)=>{
-    setName(e.target.value);
-  }
-  const onChangePassword = (e)=>{
-    setPassword(e.target.value);
-  }
   const onSubmit = (e)=>{
     e.preventDefault();
-    dispatch(fetchToken({email:name, password:password}));
+    console.log(nameRef.current.value, passwordRef.current.value);
+    dispatch({type:"login/setEmail", payload:nameRef.current.value});
+    dispatch({type:"login/setPassword", payload:passwordRef.current.value})
+    dispatch(fetchToken({email:nameRef.current.value, password:passwordRef.current.value}));
+    navigate('/user/:id');
   }
-  
-
 
   return (
     <>
@@ -47,18 +40,17 @@ export default function SignIn() {
         <form onSubmit={(e)=>onSubmit(e)}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label
-            ><input type="text" id="username" onChange={(e)=>onChangeName(e)}/>
+            ><input type="text" id="username" ref = {nameRef} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label
-            ><input type="password" id="password" onChange={(e)=>onChangePassword(e)}/>
+            ><input type="password" id="password" ref ={passwordRef} />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me"> Remember me </label>
           </div>
           <input type="submit" className="sign-in-button" value="Sign In"/>
-          {/* <Link to='/user/id' className="sign-in-button">Sign In</Link> */}
         </form>
       </section>
       </main>

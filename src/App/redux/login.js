@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import CallsAPI from "../callsAPI";
-// import { getData } from "../getData";
 
 
 const API = new CallsAPI('http://localhost:3001/api/v1/user');
 
 const initialState = {
+  email:'',
+  password:'',
   jwt: ''
 }
 
@@ -21,10 +22,17 @@ export const fetchToken = createAsyncThunk(
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    setEmail:(state, action)=>{
+      state.email = action.payload;
+    },
+    setPassword:(state, action)=>{
+      state.password = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchToken.fulfilled, (state, action) => {
-      state.jwt = action.payload
+      state.jwt = action.payload;
     })
   },
 })
@@ -32,23 +40,3 @@ export const loginSlice = createSlice({
 export default loginSlice.reducer
 
 
-
-
-// const API = new CallsAPI('http://localhost:3001/api/v1/user');
-
-// const loginSlice = createSlice({
-//   name: "login",
-//   initialState: '',
-//   reducers: {
-//     getToken: async (state, action) => {
-//       const  res = await API.getUserToken('/login', {email:action.payload.email, password:action.payload.password});
-//       state = res.body.token;
-//       console.log(state);
-//      }
-//   }
-// });
-
-
-
-
-// export default loginSlice.reducer

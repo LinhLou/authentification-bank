@@ -1,4 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import { userProfileLoader } from '../App/Loader/userProfileLoader';
 import Layout from '../Components/Layout';
 import Home from '../Pages/Index';
 import SignIn from '../Pages/Sign-in';
@@ -17,9 +18,9 @@ const router = createBrowserRouter(
       />
       <Route
         path= '/user/:id'
-        // loader={userInfosLoader}
+        loader={userProfileLoader}
         element={<User />}
-        // errorElement = {<Error />}
+        errorElement = {<p> error </p>}
       />
     </Route>
   )
