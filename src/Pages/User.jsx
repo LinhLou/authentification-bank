@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useLoaderData } from 'react-router-dom';
 import Logo from '../Components/Logo';
 import SignIn from './Sign-in';
-// import PageProfilStyles from '../Styles/pageProfil.styled';
+
 // import { getData } from '../App/getData';
 
 

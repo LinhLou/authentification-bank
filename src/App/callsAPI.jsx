@@ -65,6 +65,14 @@ class CallsAPI {
     return res ;
   }
 
+  async updateUserProfile(url, jwt, data){
+    const res = await jsonOrThrowIfError(await fetch(`${this.baseURL}${url}`, { headers: {
+      "Content-Type": "application/json",
+      "Authorization":`Bearer ${jwt}`
+    }, method: "POST", body: JSON.stringify(data)}));
+    return res ;
+  }
+
 }
 
 export default CallsAPI;

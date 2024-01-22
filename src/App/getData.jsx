@@ -11,9 +11,13 @@ export const getData = async (userData) =>{
   const  res = await API.getUserToken('/login', {email:userData.email, password:userData.password});
   console.log(res.body.token)
 
-  // const 
-  const profile =  await API.getUserProfile('/profile',res.body.token);
-  console.log(profile.body)
-  return { res, profile}
+  // // const 
+  // const profile =  await API.getUserProfile('/profile',res.body.token);
+  // console.log(profile.body)
+
+  // const updatedProfile = await API.updateUserProfile('/profile', res.body.token, {firstName:userData.firstName, lastName: userData.lastName})
+
+  // console.log(updatedProfile.body)
+  return res.body.token
   
 }
