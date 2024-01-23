@@ -17,7 +17,7 @@ const router = createBrowserRouter(
         element={<SignIn />}
       />
       <Route
-        path= '/user/:id'
+        path= '/user'
         loader={userProfileLoader}
         element={<User />}
         errorElement = {<p> error </p>}

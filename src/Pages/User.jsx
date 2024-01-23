@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useLoaderData } from 'react-router-dom';
 import Logo from '../Components/Logo';
-import SignIn from './Sign-in';
-
-
-// import { getData } from '../App/getData';
 
 
 
 
 export default function Profile() {
-  const { userProfile } = useLoaderData();
-  console.log(userProfile)
+
+  const { userData } = useLoaderData();
+  const profile = userData.profile;
+  // console.log(userData.profile)
+
 
 
   return (
@@ -20,9 +19,9 @@ export default function Profile() {
         <nav className="main-nav">
           <Logo />
           <div>
-            <Link to='/user/id' className="main-nav-item" element={<SignIn />}>
+            <Link to='/user' className="main-nav-item">
               <i className="fa fa-user-circle"></i>
-              Tony
+              {profile.firstName}
             </Link>
             <Link to="/" className="main-nav-item" >
               <i className="fa fa-sign-out"></i>
@@ -33,7 +32,7 @@ export default function Profile() {
       </header>
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
+          <h1>Welcome back<br />{profile.firstName} {profile.lastName}!</h1>
           <button className="edit-button">Edit Name</button>
         </div>
         <h2 className="sr-only">Accounts</h2>
@@ -71,11 +70,5 @@ export default function Profile() {
     </>
   )
 }
-
-// export const  userProfileLoader = async({params})=>{
-//   const { id } = params;
-//   const userData  = await getData(id);
-//   return { userData } 
-// }
 
 

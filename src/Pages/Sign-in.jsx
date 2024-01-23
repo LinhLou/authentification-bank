@@ -1,23 +1,25 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
-import { useDispatch } from 'react-redux';
-import { fetchToken } from '../App/redux/login';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProfile } from '../App/redux/login';
+
 
 export default function SignIn() {
-  const navigate = useNavigate();
-  const nameRef = useRef();
-  const passwordRef = useRef();
- 
+  // access to Redux store reducers
   const dispatch = useDispatch();
+
+  // referenced to the email and password inputs
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  // React-router-dom to navigate to other page
+  const navigate = useNavigate();
  
-  const onSubmit = (e)=>{
+  const onSubmit = async (e)=>{
     e.preventDefault();
-    console.log(nameRef.current.value, passwordRef.current.value);
-    dispatch({type:"login/setEmail", payload:nameRef.current.value});
-    dispatch({type:"login/setPassword", payload:passwordRef.current.value})
-    dispatch(fetchToken({email:nameRef.current.value, password:passwordRef.current.value}));
-    navigate('/user/:id');
+    await dispatch(fetchProfile({email:emailRef.current.value, password:passwordRef.current.value}));
+    navigate('/user');
   }
 
   return (
@@ -40,7 +42,7 @@ export default function SignIn() {
         <form onSubmit={(e)=>onSubmit(e)}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label
-            ><input type="text" id="username" ref = {nameRef} />
+            ><input type="text" id="username" ref = {emailRef} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label
