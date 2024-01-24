@@ -21,6 +21,10 @@ body {
   background-color: #12002b;
 }
 
+.bg-light {
+  background-color: rgb(156, 152, 152);
+}
+
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
@@ -259,10 +263,45 @@ body {
   padding: 10px;
 }
 
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+.edit-name, .edit-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:20px;
+}
+.edit-name input {
+  width: 200px;
+  height:40px ;
+  border: 1px solid gray;
+  border-radius: 3px;
+  font-size: 1rem;
+  padding-left: 15px;
+}
+.edit-buttons button{
+  width: 130px;
+  height:30px ;
+  border: 1px solid violet;
+  border-radius: 3px;
+  color: violet;
+  font-size: 1rem;
+}
+
+.edit-invisible {
+  display:none;
+}
+
+
+
 .header {
   color: #fff;
   margin-bottom: 2rem;
 }
+
 
 .transaction-button {
   display: block;

@@ -6,6 +6,7 @@ import { fetchProfile } from '../App/redux/loginSlice';
 
 
 export default function SignIn() {
+  localStorage.clear();
   // access to Redux store reducers
   const dispatch = useDispatch();
 
