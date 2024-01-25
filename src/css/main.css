@@ -314,6 +314,9 @@ body {
   background-color: #00bc77;
   color: #fff;
 }
+.transaction-button-editname{
+  background-color: violet;
+}
 
 @media (min-width: 720px) {
   .account {

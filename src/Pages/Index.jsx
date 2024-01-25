@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SignIn from './Sign-in';
 import iconMoney from "../img/icon-money.png";
 import iconChat from "../img/icon-chat.png";
 import iconSecurity from "../img/icon-security.png";
 import Logo from '../Components/Logo';
+import { useDispatch } from 'react-redux';
+
 
 export default function Home() {
   localStorage.clear();
+
+  const dispatch = useDispatch();
+
+    // // reset states
+    // useEffect(()=>{
+    //   dispatch(resetStyle());
+    //   dispatch(resetInfo());
+    // },[]);
+
 
   return (
     <>

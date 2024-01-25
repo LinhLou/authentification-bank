@@ -1,14 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProfile } from '../App/redux/loginSlice';
+import { fetchProfile, resetInfo } from '../redux/Login/loginSlice';
+import { resetStyle } from '../redux/Styles/styleSlice';
 
 
 export default function SignIn() {
   localStorage.clear();
-  // access to Redux store reducers
+  // access to Redux
   const dispatch = useDispatch();
+
+  // reset states
+  useEffect(()=>{
+    dispatch(resetStyle());
+    dispatch(resetInfo());
+  },[]);
+  
 
   // referenced to the email and password inputs
   const emailRef = useRef();

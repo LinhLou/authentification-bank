@@ -3,19 +3,20 @@ import { Link, useParams, useLoaderData } from 'react-router-dom';
 import Logo from '../Components/Logo';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { editStyle, initStyle } from '../App/redux/styleSlice';
+import { editStyle, resetStyle, transactionStyle } from '../redux/Styles/styleSlice';
 
 
 
 
 export default function Profile() {
-
+  
   const { userData } = useLoaderData();
   const profile = userData.profile;
-
+  
   const dispatch = useDispatch();
-  let style = useSelector(state=>state.style);
-
+  const style = useSelector(state=>state.style);
+  
+  // useEffect(()=>{dispatch(initStyle())});
   // //  state persist when refreshing page
   // if(!localStorage.getItem('styleInitial')){
   //   localStorage.setItem('styleInitial',JSON.stringify(style));
@@ -33,13 +34,16 @@ export default function Profile() {
   }
 
   const clickSaveBtnHandle = ()=>{
-    dispatch(initStyle());
+    dispatch(resetStyle());
   }
 
   const clickCancleBtnHandle = ()=>{
-    dispatch(initStyle());
+    dispatch(resetStyle());
   }
   
+  const clickTransactionBtnHandle = ()=>{
+    dispatch(transactionStyle());
+  }
   
 
 
@@ -62,15 +66,15 @@ export default function Profile() {
       </header>
       <main className={style.main}>
         <div className="header">
-          <h1>Welcome back<br /><span className="edit-invisible"> {profile.firstName} {profile.lastName}! </span></h1>
-          <button className={style.editBtn} onClick={()=>clickEditBtnHandle()}>Edit Name</button>
-          <form className="edit-form ">
+          <h1>Welcome back<br /><span className={style.nameSpan}> {profile.firstName} {profile.lastName}! </span></h1>
+          <button type="button" className={style.editBtn} onClick={()=>clickEditBtnHandle()}>Edit Name</button>
+          <form className={style.nameForm}>
             <div className='edit-name'>
               <input type="text" placeholder={profile.firstName}/>
               <input type="text" placeholder={profile.lastName}/>
             </div>
             <div className='edit-buttons'>
-              <button onClick={()=>clickSaveBtnHandle()}>Save</button>
+              <button type="submit" onClick={()=>clickSaveBtnHandle()}>Save</button>
               <button onClick={()=>clickCancleBtnHandle()}>Cancel</button>
             </div>
           </form>
@@ -83,7 +87,7 @@ export default function Profile() {
             <p className="account-amount-description">Available Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
+            <button onClick={()=>clickTransactionBtnHandle()} className={style.transactionBtn}>View transactions</button>
           </div>
         </section>
         <section className="account">
@@ -93,7 +97,7 @@ export default function Profile() {
             <p className="account-amount-description">Available Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
+            <button onClick={()=>clickTransactionBtnHandle()} className={style.transactionBtn}>View transactions</button>
           </div>
         </section>
         <section className="account">
@@ -103,7 +107,7 @@ export default function Profile() {
             <p className="account-amount-description">Current Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
+            <button onClick={()=>clickTransactionBtnHandle()} className={style.transactionBtn}>View transactions</button>
           </div>
         </section>
       </main>   
