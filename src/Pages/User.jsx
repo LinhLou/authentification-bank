@@ -4,36 +4,41 @@ import Logo from '../Components/Logo';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { editStyle, resetStyle, transactionStyle } from '../redux/Styles/styleSlice';
+import { resetInfo } from '../redux/Post/postSlice';
 
+import UserServices from '../App/userService';
 
 
 
 export default function Profile() {
-  
+
+  const service = new UserServices();
   const { userData } = useLoaderData();
   const profile = userData.profile;
+  const jwt = userData.jwt;
+
+  // console.log(jwt, profile)
+
+
+  const refFirstName = useRef();
+  const refLastName = useRef();
+
+
   
   const dispatch = useDispatch();
   const style = useSelector(state=>state.style);
+
   
-  // useEffect(()=>{dispatch(initStyle())});
-  // //  state persist when refreshing page
-  // if(!localStorage.getItem('styleInitial')){
-  //   localStorage.setItem('styleInitial',JSON.stringify(style));
-  // }
-
-  // if(!localStorage.getItem('style')||localStorage.getItem('styleInitial')!==JSON.stringify(style)){
-  //   localStorage.setItem('style',JSON.stringify(style));
-  // }
-
-  // style = JSON.parse(localStorage.getItem('style'));
 
   // event handle
   const clickEditBtnHandle=()=>{
     dispatch(editStyle());
   }
 
-  const clickSaveBtnHandle = ()=>{
+
+  const clickSaveBtnHandle = async (e)=>{
+    e.preventDefault();
+    await service.updateProfile(jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value});
     dispatch(resetStyle());
   }
 
@@ -43,6 +48,11 @@ export default function Profile() {
   
   const clickTransactionBtnHandle = ()=>{
     dispatch(transactionStyle());
+  }
+
+  const clickLogoutBtnHandle = ()=>{
+    dispatch(resetInfo());
+    dispatch(resetStyle());
   }
   
 
@@ -58,8 +68,7 @@ export default function Profile() {
               {profile.firstName}
             </Link>
             <Link to="/" className="main-nav-item" >
-              <i className="fa fa-sign-out"></i>
-              Sign Out
+              <button onClick={()=>clickLogoutBtnHandle()}> <i className="fa fa-sign-out"></i> Sign Out</button>
             </Link>
           </div>
         </nav>
@@ -70,11 +79,11 @@ export default function Profile() {
           <button type="button" className={style.editBtn} onClick={()=>clickEditBtnHandle()}>Edit Name</button>
           <form className={style.nameForm}>
             <div className='edit-name'>
-              <input type="text" placeholder={profile.firstName}/>
-              <input type="text" placeholder={profile.lastName}/>
+              <input type="text" placeholder={profile.firstName} ref={refFirstName}/>
+              <input type="text" placeholder={profile.lastName} ref={refLastName}/>
             </div>
             <div className='edit-buttons'>
-              <button type="submit" onClick={()=>clickSaveBtnHandle()}>Save</button>
+              <button type="submit" onClick={(e)=> {clickSaveBtnHandle(e)}}>Save</button>
               <button onClick={()=>clickCancleBtnHandle()}>Cancel</button>
             </div>
           </form>

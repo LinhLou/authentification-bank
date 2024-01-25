@@ -5,13 +5,11 @@ import iconMoney from "../img/icon-money.png";
 import iconChat from "../img/icon-chat.png";
 import iconSecurity from "../img/icon-security.png";
 import Logo from '../Components/Logo';
-import { useDispatch } from 'react-redux';
+
 
 
 export default function Home() {
   localStorage.clear();
-
-  const dispatch = useDispatch();
 
     // // reset states
     // useEffect(()=>{

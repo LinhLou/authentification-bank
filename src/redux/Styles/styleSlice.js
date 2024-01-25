@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialState = {
+const initialState = {
   main:'main bg-dark',
   editBtn:'edit-button',
   nameSpan:'',

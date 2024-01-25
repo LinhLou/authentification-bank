@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProfile, resetInfo } from '../redux/Login/loginSlice';
+import { fetchProfile, resetInfo } from '../redux/Post/postSlice';
 import { resetStyle } from '../redux/Styles/styleSlice';
 
 
