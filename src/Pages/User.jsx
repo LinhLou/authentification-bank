@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams, useLoaderData } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import Logo from '../Components/Logo';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { editStyle, resetStyle, transactionStyle } from '../redux/Styles/styleSlice';
-import { resetInfo } from '../redux/Post/postSlice';
-
+import { resetInfo, updateInfo } from '../redux/Post/postSlice';
 import UserServices from '../App/userService';
 
 
@@ -13,20 +12,20 @@ import UserServices from '../App/userService';
 export default function Profile() {
 
   const service = new UserServices();
-  const { userData } = useLoaderData();
-  const profile = userData.profile;
-  const jwt = userData.jwt;
-
-  // console.log(jwt, profile)
-
+  // const { userData } = useLoaderData();
 
   const refFirstName = useRef();
   const refLastName = useRef();
 
-
   
   const dispatch = useDispatch();
   const style = useSelector(state=>state.style);
+  const user = useSelector(state=>state.user);
+
+  const profile = user.profile;
+  const jwt = user.jwt;
+
+  // console.log(user);
 
   
 
@@ -36,13 +35,17 @@ export default function Profile() {
   }
 
 
-  const clickSaveBtnHandle = async (e)=>{
+  const clickSaveBtnHandle = (e)=>{
     e.preventDefault();
-    await service.updateProfile(jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value});
+    service.updateProfile(jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value});
+    dispatch(updateInfo({firstName:refFirstName.current.value, lastName: refLastName.current.value}));
     dispatch(resetStyle());
+    refFirstName.current.value='';
+    refLastName.current.value='';
   }
 
-  const clickCancleBtnHandle = ()=>{
+  const clickCancleBtnHandle = (e)=>{
+    e.preventDefault();
     dispatch(resetStyle());
   }
   
@@ -84,7 +87,7 @@ export default function Profile() {
             </div>
             <div className='edit-buttons'>
               <button type="submit" onClick={(e)=> {clickSaveBtnHandle(e)}}>Save</button>
-              <button onClick={()=>clickCancleBtnHandle()}>Cancel</button>
+              <button onClick={(e)=>clickCancleBtnHandle(e)}>Cancel</button>
             </div>
           </form>
         </div>

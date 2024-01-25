@@ -19,7 +19,7 @@ export const postSlice = createSlice({
   initialState,
   reducers: {
     resetInfo: () => initialState,
-    updateInfo: (state,action)=>{
+    updateInfo: (state, action)=>{
       state.profile.firstName = action.payload.firstName;
       state.profile.lastName = action.payload.lastName;
     }

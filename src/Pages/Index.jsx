@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import SignIn from './Sign-in';
 import iconMoney from "../img/icon-money.png";
@@ -9,14 +9,6 @@ import Logo from '../Components/Logo';
 
 
 export default function Home() {
-  localStorage.clear();
-
-    // // reset states
-    // useEffect(()=>{
-    //   dispatch(resetStyle());
-    //   dispatch(resetInfo());
-    // },[]);
-
 
   return (
     <>

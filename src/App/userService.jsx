@@ -12,33 +12,11 @@ class UserServices{
       return { jwt, userProfile };
     }
 
-    async updateProfile (jwt, userData){
-      const  res = await API.updateUserProfile('/profile', jwt, {firstName:userData.firstName, lastName: userData.lastName});
-      const newData = res.body;
-      return { newData }
+    async updateProfile (jwt, newData){
+      const  res = await API.updateUserProfile('/profile', jwt, {firstName:newData.firstName, lastName: newData.lastName});
+      const updatedData = res.body;
+      return { updatedData }
     };
 }
 
 export default  UserServices
-
-
-
-// export const getData = async (userData) =>{
-//   //------------------get data from API ------------------
-
-  
-//   // --------------------------------------------------------
-//   const  res = await API.getUserToken('/login', {email:userData.email, password:userData.password});
-//   // console.log(res.body.token)
-
-//   // // const 
-//   const profile =  await API.getUserProfile('/profile',res.body.token);
-//   // console.log(profile.body)
-
-//   const updatedProfile = await API.updateUserProfile('/profile', res.body.token, {firstName:userData.firstName, lastName: userData.lastName})
-//   console.log(updatedProfile)
-
-//   // console.log(updatedProfile.body)
-//   return {res, profile, updatedProfile}
-  
-// }
