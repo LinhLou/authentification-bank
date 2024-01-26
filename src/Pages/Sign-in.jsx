@@ -6,7 +6,7 @@ import { fetchProfile, resetInfo } from '../redux/Post/postSlice';
 import { resetStyle } from '../redux/Styles/styleSlice';
 
 
-export default function SignIn() {
+export default function SignIn({status}) {
   // access to Redux
   const dispatch = useDispatch();
 
@@ -55,6 +55,9 @@ export default function SignIn() {
           <div className="input-wrapper">
             <label htmlFor="password">Password</label
             ><input type="password" id="password" ref ={passwordRef} />
+          </div>
+          <div className={status}>
+           The informations are incorecte. Please try again!
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />

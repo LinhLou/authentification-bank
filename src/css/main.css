@@ -222,6 +222,15 @@ body {
   padding: 5px;
   font-size: 1.2rem;
 }
+.login-succeeded {
+  display:none;
+}
+.login-false {
+  display: block;
+  color:red;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
 
 .footer {
   display: flex;

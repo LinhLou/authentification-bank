@@ -4,7 +4,8 @@ import UserServices from "../../App/userService";
 const service = new UserServices();
 
 const initialState = {
-  jwt: ''
+  jwt: '',
+  status:false
 };
 
 
@@ -22,6 +23,7 @@ export const postSlice = createSlice({
     updateInfo: (state, action)=>{
       state.profile.firstName = action.payload.firstName;
       state.profile.lastName = action.payload.lastName;
+      state.status = true;
     }
   },
   extraReducers: (builder) => {
@@ -29,6 +31,10 @@ export const postSlice = createSlice({
       .addCase(fetchProfile.fulfilled, (state, action) => {
         state.jwt = action.payload.jwt;
         state.profile = action.payload.userProfile;
+        state.status = true;
+      })
+      .addCase(fetchProfile.rejected, (state) => {
+        state.status = false;
       })
   },
 });

@@ -14,13 +14,13 @@ const router = createBrowserRouter(
       />
       <Route
         path= '/signin'
-        element={<SignIn />}
+        element={<SignIn status={ "login-succeeded" }/>}
       />
       <Route
         path= '/user'
         loader={userLoader}
         element={<User />}
-        errorElement = {<p> error </p>}
+        errorElement = {<SignIn status={ "login-false" } />}
       />
     </Route>
   )
