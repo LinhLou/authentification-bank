@@ -145,6 +145,7 @@ body {
   }
 }
 
+
 .feature-icon {
   width: 100px;
   border: 10px solid #00bc77;
@@ -305,18 +306,17 @@ body {
 }
 
 .edit-name input {
-  width: 200px;
+  width: 130px;
   height:40px ;
   border: 1.2px solid #ccd7de;
   border-radius: 4px;
   font-size: 1rem;
-  /* color:#ccd7de; */
   padding-left: 15px;
   outline: none;
 }
 
 .edit-buttons button{
-  width: 130px;
+  width: 90px;
   height:30px ;
   border: 1.2px solid #6e62f5;
   border-radius: 4px;
@@ -360,6 +360,19 @@ body {
 }
 
 /* ------------------------------------------- */
+@media (min-width: 920px) {
+  .edit-name input {
+    width: 200px;
+    height:40px ;
+
+  }
+  
+  .edit-buttons button{
+    width: 130px;
+    height:30px ;
+  }
+}
+
 
 @media (min-width: 720px) {
   .account {
@@ -371,6 +384,6 @@ body {
   }
 
   .transaction-button {
-    width: 200px;
+    width: 250px;
   }
 }
