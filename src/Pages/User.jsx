@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../Components/Logo';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { editStyle, resetStyle, transactionStyle } from '../redux/Styles/styleSlice';
+import { editStyle, resetStyle } from '../redux/Styles/styleSlice';
 import { resetInfo, updateInfo } from '../redux/Post/postSlice';
 import UserServices from '../App/userService';
 
@@ -12,7 +12,6 @@ import UserServices from '../App/userService';
 export default function Profile() {
 
   const service = new UserServices();
-  // const { userData } = useLoaderData();
 
   const refFirstName = useRef();
   const refLastName = useRef();
@@ -25,9 +24,6 @@ export default function Profile() {
   const profile = user.profile;
   const jwt = user.jwt;
 
-  // console.log(user);
-
-  
 
   // event handle
   const clickEditBtnHandle=()=>{
@@ -48,10 +44,6 @@ export default function Profile() {
     e.preventDefault();
     dispatch(resetStyle());
   }
-  
-  const clickTransactionBtnHandle = ()=>{
-    dispatch(transactionStyle());
-  }
 
   const clickLogoutBtnHandle = ()=>{
     dispatch(resetInfo());
@@ -66,19 +58,22 @@ export default function Profile() {
         <nav className="main-nav">
           <Logo />
           <div>
-            <Link to='/user' className="main-nav-item">
+            <Link to='/user' className={style.main_nav_item}>
               <i className="fa fa-user-circle"></i>
               {profile.firstName}
             </Link>
-            <Link to="/" className="main-nav-item" >
-              <button onClick={()=>clickLogoutBtnHandle()}> <i className="fa fa-sign-out"></i> Sign Out</button>
+            <Link to="/" className={style.main_nav_item} >
+              <button className={style.logout_btn} onClick={()=>clickLogoutBtnHandle()}> 
+                <i className="fa fa-sign-out"></i> 
+                Sign Out
+              </button>
             </Link>
           </div>
         </nav>
       </header>
       <main className={style.main}>
         <div className="header">
-          <h1>Welcome back<br /><span className={style.nameSpan}> {profile.firstName} {profile.lastName}! </span></h1>
+          <h1> <span className={style.welcomeSpan}> Welcome back </span><br /><span className={style.nameSpan}> {profile.firstName} {profile.lastName}! </span></h1>
           <button type="button" className={style.editBtn} onClick={()=>clickEditBtnHandle()}>Edit Name</button>
           <form className={style.nameForm}>
             <div className='edit-name'>
@@ -92,34 +87,34 @@ export default function Profile() {
           </form>
         </div>
         <h2 className="sr-only">Accounts</h2>
-        <section className="account">
+        <section className={style.account}>
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Checking (x8349)</h3>
             <p className="account-amount">$2,082.79</p>
             <p className="account-amount-description">Available Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button onClick={()=>clickTransactionBtnHandle()} className={style.transactionBtn}>View transactions</button>
+            <button className={style.transactionBtn}>View transactions</button>
           </div>
         </section>
-        <section className="account">
+        <section className={style.account}>
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Savings (x6712)</h3>
             <p className="account-amount">$10,928.42</p>
             <p className="account-amount-description">Available Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button onClick={()=>clickTransactionBtnHandle()} className={style.transactionBtn}>View transactions</button>
+            <button className={style.transactionBtn}>View transactions</button>
           </div>
         </section>
-        <section className="account">
+        <section className={style.account}>
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
             <p className="account-amount">$184.30</p>
             <p className="account-amount-description">Current Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button onClick={()=>clickTransactionBtnHandle()} className={style.transactionBtn}>View transactions</button>
+            <button className={style.transactionBtn}>View transactions</button>
           </div>
         </section>
       </main>   
