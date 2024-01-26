@@ -5,7 +5,7 @@ const service = new UserServices();
 
 const initialState = {
   jwt: '',
-  status:false
+  status:true
 };
 
 
