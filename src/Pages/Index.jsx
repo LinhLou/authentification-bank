@@ -23,7 +23,7 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main>
+      <main className='main'>
         <div className="hero">
           <section className="hero-content">
             <h2 className="sr-only">Promoted Content</h2>

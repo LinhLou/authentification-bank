@@ -13,9 +13,17 @@ body {
   min-height: 100vh;
 }
 
-.main {
-  flex: 1;
+#root {
+  flex:1;
+  display: flex;
+  flex-direction: column;
 }
+
+
+.main {
+  flex:1;
+}
+
 
 .bg-dark {
   background-color: #12002b;
@@ -172,8 +180,8 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
   background-color: #00bc77;
+  border:none;
   color: #fff;
 }
 
@@ -187,7 +195,7 @@ body {
 }
 
 .sign-in-icon {
-  font-size: 5rem;
+  font-size: 1.5rem;
 }
 
 .input-remember {

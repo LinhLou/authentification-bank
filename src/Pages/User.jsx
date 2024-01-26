@@ -54,7 +54,7 @@ export default function Profile() {
 
   return (
     <>
-      <header>
+      <header className='body-header'>
         <nav className="main-nav">
           <Logo />
           <div>

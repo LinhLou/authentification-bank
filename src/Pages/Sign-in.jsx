@@ -32,7 +32,7 @@ export default function SignIn() {
 
   return (
     <>
-      <header>
+      <header className='body-header'>
         <nav className="main-nav">
           <Logo />
           <div>

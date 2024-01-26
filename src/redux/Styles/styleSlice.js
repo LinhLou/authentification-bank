@@ -18,15 +18,15 @@ export const styleSlice = createSlice({
   initialState,
   reducers:{
     editStyle: (state=initialState)=>{
-      state.main = 'main bg-light' ;
-      state.editBtn = 'edit-button edit-invisible' ;
-      state.main_nav_item ="main-nav-item main-nav-item-edit";
-      state.logout_btn='logout-button logout-button-edit';
+      state.main += ' bg-light' ;
+      state.editBtn += ' edit-invisible' ;
+      state.main_nav_item +=" main-nav-item-edit";
+      state.logout_btn +=' logout-button-edit';
       state.nameSpan = 'edit-invisible';
       state.welcomeSpan = 'edit-header';
       state.nameForm = 'edit-form';
-      state.account = 'account account-edit';
-      state.transactionBtn='transaction-button transaction-button-editname';
+      state.account += ' account-edit';
+      state.transactionBtn +=' transaction-button-editname';
     },
     resetStyle: ()=>initialState
   }
