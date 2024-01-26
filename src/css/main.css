@@ -310,7 +310,7 @@ body {
   border: 1.2px solid #ccd7de;
   border-radius: 4px;
   font-size: 1rem;
-  color:#ccd7de;
+  /* color:#ccd7de; */
   padding-left: 15px;
   outline: none;
 }
