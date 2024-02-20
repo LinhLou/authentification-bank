@@ -26,12 +26,12 @@ export default function Profile() {
 
 
   // event handle
-  const clickEditBtnHandle=()=>{
+  const handleEdit=()=>{
     dispatch(editStyle());
   }
 
 
-  const clickSaveBtnHandle = (e)=>{
+  const handleSave = (e)=>{
     e.preventDefault();
     service.updateProfile(jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value});
     dispatch(updateInfo({firstName:refFirstName.current.value, lastName: refLastName.current.value}));
@@ -40,12 +40,12 @@ export default function Profile() {
     refLastName.current.value='';
   }
 
-  const clickCancleBtnHandle = (e)=>{
+  const handleCancle = (e)=>{
     e.preventDefault();
     dispatch(resetStyle());
   }
 
-  const clickLogoutBtnHandle = ()=>{
+  const handleLogout = ()=>{
     dispatch(resetInfo());
     dispatch(resetStyle());
   }
@@ -63,8 +63,8 @@ export default function Profile() {
               {profile.firstName}
             </Link>
             <Link to="/" className={style.main_nav_item} >
-              <button className={style.logout_btn} onClick={()=>clickLogoutBtnHandle()}> 
-                <i className="fa fa-sign-out"></i> 
+              <button className={style.logout_btn} onClick={handleLogout}> 
+                <i className="fa fa-sign-out icon-sign-out"></i> 
                 Sign Out
               </button>
             </Link>
@@ -74,15 +74,15 @@ export default function Profile() {
       <main className={style.main}>
         <div className="header">
           <h1> <span className={style.welcomeSpan}> Welcome back </span><br /><span className={style.nameSpan}> {profile.firstName} {profile.lastName}! </span></h1>
-          <button type="button" className={style.editBtn} onClick={()=>clickEditBtnHandle()}>Edit Name</button>
+          <button type="button" className={style.editBtn} onClick={handleEdit}>Edit Name</button>
           <form className={style.nameForm}>
             <div className='edit-name'>
               <input type="text" placeholder={profile.firstName} ref={refFirstName}/>
               <input type="text" placeholder={profile.lastName} ref={refLastName}/>
             </div>
             <div className='edit-buttons'>
-              <button type="submit" onClick={(e)=> {clickSaveBtnHandle(e)}}>Save</button>
-              <button onClick={(e)=>clickCancleBtnHandle(e)}>Cancel</button>
+              <button type="submit" onClick={(e)=> {handleSave(e)}}>Save</button>
+              <button onClick={(e)=>handleCancle(e)}>Cancel</button>
             </div>
           </form>
         </div>

@@ -5,8 +5,7 @@ import { useDispatch } from 'react-redux';
 import { fetchProfile, resetInfo } from '../redux/Post/postSlice';
 import { resetStyle } from '../redux/Styles/styleSlice';
 
-
-export default function SignIn({status}) {
+export default function SignIn ({status}){
   // access to Redux
   const dispatch = useDispatch();
 
@@ -15,29 +14,28 @@ export default function SignIn({status}) {
     dispatch(resetStyle());
     dispatch(resetInfo());
   },[]);
-  
 
   // referenced to the email and password inputs
-  const emailRef = useRef();
-  const passwordRef = useRef();
-
-  // React-router-dom to navigate to other page
-  const navigate = useNavigate();
+   const emailRef = useRef();
+   const passwordRef = useRef();
  
-  const onSubmit = async (e)=>{
-    e.preventDefault();
-    await dispatch(fetchProfile({email:emailRef.current.value, password:passwordRef.current.value}));
-    navigate('/user');
-  }
+   // React-router-dom to navigate to other page
+   const navigate = useNavigate();
+  
+   const handleSubmit = async (e)=>{
+     e.preventDefault();
+     await dispatch(fetchProfile({email:emailRef.current.value, password:passwordRef.current.value}));
+     navigate('/user');
+   }
 
-  return (
+   return (
     <>
       <header className='body-header'>
         <nav className="main-nav">
           <Logo />
           <div>
             <Link to='/signin' className="main-nav-item" >
-              <i className="fa fa-user-circle"></i>
+              <i className="fa fa-user-circle icon-user-circle"></i>
               Sign In
             </Link>
           </div>
@@ -47,7 +45,7 @@ export default function SignIn({status}) {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form onSubmit={(e)=>onSubmit(e)}>
+        <form onSubmit={(e)=>handleSubmit(e)}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label
             ><input type="text" id="username" ref = {emailRef} />
@@ -57,7 +55,7 @@ export default function SignIn({status}) {
             ><input type="password" id="password" ref ={passwordRef} />
           </div>
           <div className={status}>
-           The informations are incorecte. Please try again!
+          The informations are incorecte. Please try again!
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
@@ -68,5 +66,6 @@ export default function SignIn({status}) {
       </section>
       </main>
     </>
-  )
+   )
 }
+
