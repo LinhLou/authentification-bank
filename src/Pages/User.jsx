@@ -4,7 +4,7 @@ import Logo from '../Components/Logo';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { editStyle, resetStyle } from '../redux/Styles/styleSlice';
-import { resetInfo, updateInfo } from '../redux/Post/postSlice';
+import { resetInfo, updateInfo } from '../redux/User/userSlice';
 import UserServices from '../App/userService';
 
 

@@ -10,13 +10,13 @@ const initialState = {
 
 
 export const fetchProfile = createAsyncThunk(
-  'post/fetchProfile',
+  'user/fetchProfile',
   service.login
 );
 
 
-export const postSlice = createSlice({
-  name: 'post',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     resetInfo: () => initialState,
@@ -39,8 +39,8 @@ export const postSlice = createSlice({
   },
 });
 
-export const { resetInfo, updateInfo } = postSlice.actions;
+export const { resetInfo, updateInfo } = userSlice.actions;
 
-export default postSlice.reducer
+export default userSlice.reducer
 
 

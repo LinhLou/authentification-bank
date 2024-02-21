@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
 import { useDispatch } from 'react-redux';
-import { fetchProfile, resetInfo } from '../redux/Post/postSlice';
+import { fetchProfile, resetInfo } from '../redux/User/userSlice';
 import { resetStyle } from '../redux/Styles/styleSlice';
 
 export default function SignIn ({status}){
