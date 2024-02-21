@@ -26,7 +26,7 @@ class CallsAPI {
     return res ;
   }
 
-  async updateUserProfile(url, jwt, data){
+  async updateUserProfile(url, [jwt, data]){
     const res = await jsonOrThrowIfError(await fetch(`${this.baseURL}${url}`, { headers: {
       "Content-Type": "application/json",
       "Authorization":`Bearer ${jwt}`

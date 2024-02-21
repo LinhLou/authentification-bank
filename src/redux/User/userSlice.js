@@ -5,7 +5,9 @@ const service = new UserServices();
 
 const initialState = {
   jwt: '',
-  status:true
+  firstName: '',
+  lastName: '',
+  connexion: 'pending' // 3 value possible: pending, success, fail
 };
 
 
@@ -14,27 +16,35 @@ export const fetchProfile = createAsyncThunk(
   service.login
 );
 
+export const updateProfile = createAsyncThunk(
+  'user/updateProfile',
+  service.updateProfile
+);
+
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     resetInfo: () => initialState,
-    updateInfo: (state, action)=>{
-      state.profile.firstName = action.payload.firstName;
-      state.profile.lastName = action.payload.lastName;
-      state.status = true;
-    }
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProfile.fulfilled, (state, action) => {
         state.jwt = action.payload.jwt;
-        state.profile = action.payload.userProfile;
-        state.status = true;
+        state.firstName = action.payload.userProfile.firstName;
+        state.lastName = action.payload.userProfile.lastName;
+        state.connexion = 'success';
       })
       .addCase(fetchProfile.rejected, (state) => {
-        state.status = false;
+        state.connexion = 'fail';
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.firstName = action.payload.updatedData.firstName;
+        state.lastName = action.payload.updatedData.lastName;
+      })
+      .addCase(updateProfile.rejected, (state) => {
+        state.error = 'error here';
       })
   },
 });

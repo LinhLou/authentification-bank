@@ -4,24 +4,20 @@ import Logo from '../Components/Logo';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { editStyle, resetStyle } from '../redux/Styles/styleSlice';
-import { resetInfo, updateInfo } from '../redux/User/userSlice';
-import UserServices from '../App/userService';
-
+import { resetInfo, updateProfile } from '../redux/User/userSlice';
 
 
 export default function Profile() {
-
-  const service = new UserServices();
-
   const refFirstName = useRef();
   const refLastName = useRef();
 
-  
+  // acces to redux store
   const dispatch = useDispatch();
   const style = useSelector(state=>state.style);
   const user = useSelector(state=>state.user);
 
-  const profile = user.profile;
+  const firstName = user.firstName;
+  const lastName = user.lastName;
   const jwt = user.jwt;
 
 
@@ -31,13 +27,10 @@ export default function Profile() {
   }
 
 
-  const handleSave = (e)=>{
+  const  handleSave = async (e)=>{
     e.preventDefault();
-    service.updateProfile(jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value});
-    dispatch(updateInfo({firstName:refFirstName.current.value, lastName: refLastName.current.value}));
+    await dispatch(updateProfile([jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value}]));
     dispatch(resetStyle());
-    refFirstName.current.value='';
-    refLastName.current.value='';
   }
 
   const handleCancle = (e)=>{
@@ -60,7 +53,7 @@ export default function Profile() {
           <div>
             <Link to='/user' className={style.main_nav_item}>
               <i className="fa fa-user-circle"></i>
-              {profile.firstName}
+              {firstName}
             </Link>
             <Link to="/" className={style.main_nav_item} >
               <button className={style.logout_btn} onClick={handleLogout}> 
@@ -73,12 +66,12 @@ export default function Profile() {
       </header>
       <main className={style.main}>
         <div className="header">
-          <h1> <span className={style.welcomeSpan}> Welcome back </span><br /><span className={style.nameSpan}> {profile.firstName} {profile.lastName}! </span></h1>
+          <h1> <span className={style.welcomeSpan}> Welcome back </span><br /><span className={style.nameSpan}> {firstName} {lastName}! </span></h1>
           <button type="button" className={style.editBtn} onClick={handleEdit}>Edit Name</button>
           <form className={style.nameForm}>
             <div className='edit-name'>
-              <input type="text" placeholder={profile.firstName} ref={refFirstName}/>
-              <input type="text" placeholder={profile.lastName} ref={refLastName}/>
+              <input type="text" placeholder={firstName} ref={refFirstName}/>
+              <input type="text" placeholder={lastName} ref={refLastName}/>
             </div>
             <div className='edit-buttons'>
               <button type="submit" onClick={(e)=> {handleSave(e)}}>Save</button>
