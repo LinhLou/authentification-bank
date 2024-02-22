@@ -1,19 +1,31 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { fetchProfile, resetInfo } from '../redux/User/userSlice';
 import { resetStyle } from '../redux/Styles/styleSlice';
+import store from '../redux/store';
 
-export default function SignIn ({status}){
-  // access to Redux
-  const dispatch = useDispatch();
+export default function SignIn (){
 
   // reset states
   useEffect(()=>{
     dispatch(resetStyle());
     dispatch(resetInfo());
   },[]);
+
+  // access to Redux
+  const dispatch = useDispatch();
+  const user = useSelector(state=>state.user);
+  const connexion = user.status.login;
+
+  // add class to formular sigin
+  let class_Signin = '';
+  if(connexion==='fail'){
+    class_Signin ='login-false';
+  }else{
+    class_Signin ='login-init';
+  }
 
   // referenced to the email and password inputs
    const emailRef = useRef();
@@ -25,7 +37,13 @@ export default function SignIn ({status}){
    const handleSubmit = async (e)=>{
      e.preventDefault();
      await dispatch(fetchProfile({email:emailRef.current.value, password:passwordRef.current.value}));
-     navigate('/user');
+     const state = store.getState();
+     const connexion = state.user.status.login;
+     if(connexion==='success'){
+      navigate('/user');
+     }else{
+      navigate('/signin');
+     }
    }
 
    return (
@@ -54,7 +72,7 @@ export default function SignIn ({status}){
             <label htmlFor="password">Password</label
             ><input type="password" id="password" ref ={passwordRef} />
           </div>
-          <div className={status}>
+          <div className={class_Signin}>
           The informations are incorecte. Please try again!
           </div>
           <div className="input-remember">

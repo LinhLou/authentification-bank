@@ -1,9 +1,9 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import { userLoader } from './Loader/userLoader';
 import Layout from '../../Components/Layout';
 import Home from '../../Pages/Index';
 import SignIn from '../../Pages/Sign-in';
 import User from '../../Pages/User';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,13 +14,11 @@ const router = createBrowserRouter(
       />
       <Route
         path= '/signin'
-        element={<SignIn status={ "login-succeeded" }/>}
+        element={<SignIn />}
       />
       <Route
         path= '/user'
-        loader={userLoader}
         element={<User />}
-        errorElement = {<SignIn status={ "login-false" } />}
       />
     </Route>
   )

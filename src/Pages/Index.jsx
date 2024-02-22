@@ -7,9 +7,8 @@ import iconSecurity from "../img/icon-security.png";
 import Logo from '../Components/Logo';
 
 
-
 export default function Home() {
-
+ localStorage.removeItem('persist:root');
   return (
     <>
       <header>

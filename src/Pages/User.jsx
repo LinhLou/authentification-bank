@@ -5,7 +5,7 @@ import Logo from '../Components/Logo';
 import { useSelector, useDispatch } from 'react-redux';
 import { editStyle, resetStyle } from '../redux/Styles/styleSlice';
 import { resetInfo, updateProfile } from '../redux/User/userSlice';
-
+import store from '../redux/store';
 
 export default function Profile() {
   const refFirstName = useRef();
@@ -20,16 +20,19 @@ export default function Profile() {
   const lastName = user.lastName;
   const jwt = user.jwt;
 
-
   // event handle
   const handleEdit=()=>{
     dispatch(editStyle());
   }
 
-
   const  handleSave = async (e)=>{
     e.preventDefault();
     await dispatch(updateProfile([jwt,{firstName:refFirstName.current.value, lastName: refLastName.current.value}]));
+    const state = store.getState();
+    const updateStatus = state.user.status.update;
+    if (!updateStatus){
+      alert('Server probleme. Please try again later!')
+    }
     dispatch(resetStyle());
   }
 

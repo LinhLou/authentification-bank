@@ -7,7 +7,7 @@ const initialState = {
   jwt: '',
   firstName: '',
   lastName: '',
-  connexion: 'pending' // 3 value possible: pending, success, fail
+  status:{login: 'init', update: true}
 };
 
 
@@ -34,17 +34,17 @@ export const userSlice = createSlice({
         state.jwt = action.payload.jwt;
         state.firstName = action.payload.userProfile.firstName;
         state.lastName = action.payload.userProfile.lastName;
-        state.connexion = 'success';
+        state.status.login = 'success';
       })
       .addCase(fetchProfile.rejected, (state) => {
-        state.connexion = 'fail';
+        state.status.login = 'fail';
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.firstName = action.payload.updatedData.firstName;
         state.lastName = action.payload.updatedData.lastName;
       })
       .addCase(updateProfile.rejected, (state) => {
-        state.error = 'error here';
+        state.status.update = false;
       })
   },
 });
